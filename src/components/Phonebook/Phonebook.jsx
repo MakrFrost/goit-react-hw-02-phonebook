@@ -4,8 +4,20 @@ import React, { Component } from 'react';
 import Form from './Form/Form';
 
 class Phonebook extends Component {
+  state = {
+    contacts: [],
+  };
+
   onFormSubmitData = data => {
     console.log(data);
+    const contact = {
+      name: data.name,
+      number: data.number,
+    };
+
+    this.setState(prevState => ({
+      contacts: [contact, ...prevState.contacts],
+    }));
   };
 
   render() {
@@ -15,7 +27,10 @@ class Phonebook extends Component {
       <div>
         <Form onSubmit={this.onFormSubmitData} />
         <h1>Contacts:</h1>
-        <ul></ul>
+        <ul>
+          <li>{this.state.contacts[1]}</li>
+          <li>{this.state.contacts[2]}</li>
+        </ul>
       </div>
     );
   }
