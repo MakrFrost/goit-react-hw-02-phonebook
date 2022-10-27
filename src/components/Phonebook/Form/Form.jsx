@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { nanoid } from 'nanoid';
 
 class Form extends Component {
   state = {
-    filter: '',
     name: '',
     number: '',
   };
@@ -22,14 +22,15 @@ class Form extends Component {
   onFormSubmit = evt => {
     evt.preventDefault();
 
-    this.props.onSubmit(this.state);
+    const { name, number } = this.state;
+    const { onAddContact } = this.props;
+    onAddContact({ name, number, id: nanoid() });
+    this.setState({ name, number });
 
     this.clearForm();
   };
 
   render() {
-    // const randomId = nanoid();
-
     return (
       <div>
         <form onSubmit={this.onFormSubmit}>
