@@ -46,6 +46,7 @@ class Form extends Component {
               required
             />
           </label>
+          <br />
           <label>
             Number:
             <input
@@ -58,7 +59,7 @@ class Form extends Component {
               required
             />
           </label>
-
+          <br />
           <button type="submit">Add contact!</button>
         </form>
       </div>

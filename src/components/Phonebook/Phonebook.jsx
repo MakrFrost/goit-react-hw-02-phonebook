@@ -15,9 +15,7 @@ class Phonebook extends Component {
       <div>
         <Form onSubmit={this.onFormSubmitData} />
         <h1>Contacts:</h1>
-        <ul>
-          <li></li>
-        </ul>
+        <ul></ul>
       </div>
     );
   }
