@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 // css
 
 function Filter({ filter, onFilterChange }) {
@@ -17,3 +17,8 @@ function Filter({ filter, onFilterChange }) {
 }
 
 export default Filter;
+
+Filter.propTypes = {
+  filter: PropTypes.string,
+  onFilterChange: PropTypes.func,
+};

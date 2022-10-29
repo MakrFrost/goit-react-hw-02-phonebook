@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+
 import Form from './Form/Form';
 import Filter from './Filter/Filter';
 import Contacts from './Contacts/Contacts';
+import Section from './Section/Section';
 
 const INITIAL_STATE = {
   contacts: [
@@ -66,12 +68,16 @@ class Phonebook extends Component {
 
     return (
       <div>
-        <Form onAddContact={this.onAddContact} />
-        <Filter filter={filter} onFilterChange={this.onFilterChange} />
-        <Contacts
-          contacts={filteredContacts}
-          onDeleteContact={this.onDeleteContact}
-        />
+        <Section title={'Add contact to phonebook!'}>
+          <Form onAddContact={this.onAddContact} />
+        </Section>
+        <Section title={'Contacts:'}>
+          <Filter filter={filter} onFilterChange={this.onFilterChange} />
+          <Contacts
+            contacts={filteredContacts}
+            onDeleteContact={this.onDeleteContact}
+          />
+        </Section>
       </div>
     );
   }
