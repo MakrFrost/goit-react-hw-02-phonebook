@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Form from './Form/Form';
 import Filter from './Filter/Filter';
+import Contacts from './Contacts/Contacts';
 
 const INITIAL_STATE = {
   contacts: [
@@ -17,7 +18,7 @@ class Phonebook extends Component {
     ...INITIAL_STATE,
   };
 
-  onFilterChange = () => {
+  onFilterChange = filter => {
     this.setState({ filter });
   };
 
@@ -27,32 +28,50 @@ class Phonebook extends Component {
       alert(contact.name + 'is already in contacts!');
       return;
     }
-  };
-
-  onFormSubmitData = data => {
-    console.log(data);
-    const contact = {
-      name: data.name,
-      number: data.number,
-    };
 
     this.setState(prevState => ({
+      ...INITIAL_STATE,
       contacts: [contact, ...prevState.contacts],
     }));
   };
 
+  // onFormSubmitData = contact => {
+  //   const contact = {
+  //     name: data.name,
+  //     number: data.number,
+  //   };
+
+  //   this.setState(prevState => ({
+  //     contacts: [contact, ...prevState.contacts],
+  //   }));
+  // };
+
+  onDeleteContact = id => {
+    this.setState(({ contacts }) => {
+      const withUpdate = contacts.filter(contact => contact.id !== id);
+      return { ...INITIAL_STATE, contacts: withUpdate };
+    });
+  };
+
+  filteredContact = () => {
+    const { contacts, filter } = this.state;
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
   render() {
     const { filter } = this.state;
+    const filteredContacts = this.filteredContact();
 
     return (
       <div>
-        <Form onAddContact={this.onFormSubmitData} />
+        <Form onAddContact={this.onAddContact} />
         <Filter filter={filter} onFilterChange={this.onFilterChange} />
-        <h1>Contacts:</h1>
-        <ul>
-          <li>{this.state.contacts[1]}</li>
-          <li>{this.state.contacts[2]}</li>
-        </ul>
+        <Contacts
+          contacts={filteredContacts}
+          onDeleteContact={this.onDeleteContact}
+        />
       </div>
     );
   }
