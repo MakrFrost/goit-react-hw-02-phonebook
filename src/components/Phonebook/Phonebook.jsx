@@ -32,7 +32,6 @@ class Phonebook extends Component {
     }
 
     this.setState(prevState => ({
-      ...INITIAL_STATE,
       contacts: [contact, ...prevState.contacts],
     }));
   };
@@ -51,7 +50,7 @@ class Phonebook extends Component {
   onDeleteContact = id => {
     this.setState(({ contacts }) => {
       const withUpdate = contacts.filter(contact => contact.id !== id);
-      return { ...INITIAL_STATE, contacts: withUpdate };
+      return { contacts: withUpdate };
     });
   };
 
